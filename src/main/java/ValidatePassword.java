@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class ValidatePassword {
 
     public static String validatePassword(String password, int minLength){
@@ -17,11 +19,17 @@ public class ValidatePassword {
         return password.matches(".*\\d.*");
     }
 
-/*
-    public static boolean checkContainsUpperLowerCase(String password) {
 
+    public static boolean checkContainsUpperLowerCase(String password) {
+        boolean containsLower = !password.equals(password.toUpperCase());
+        boolean containsUpper = !password.equals(password.toLowerCase());
+        boolean containsLowerUpper = false;
+        if (containsLower & containsUpper) {
+            containsLowerUpper = true;
+        }
+        return containsLowerUpper;
     }
 
-*/
+
 
 }

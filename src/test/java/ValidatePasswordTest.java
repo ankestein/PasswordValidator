@@ -58,6 +58,40 @@ public class ValidatePasswordTest {
         Assertions.assertEquals(true, actual);
     }
 
+
+    @Test
+    public void checkContainsUpperLowerCaseOnlyLowerTest() {
+        // given
+        String password = "onlylowercase";
+        // when
+        boolean actual = ValidatePassword.checkContainsUpperLowerCase(password);
+        // then
+        Assertions.assertEquals(false, actual);
+    }
+
+    @Test
+    public void checkContainsUpperLowerCaseOnlyUpperTest() {
+        // given
+        String password = "ONLYUPPERCASE";
+        // when
+        boolean actual = ValidatePassword.checkContainsUpperLowerCase(password);
+        // then
+        Assertions.assertEquals(false, actual);
+    }
+
+    @Test
+    public void checkContainsUpperLowerCaseUpperLowerTest() {
+        // given
+        String password = "lowerAndUPPERCASE";
+        // when
+        boolean actual = ValidatePassword.checkContainsUpperLowerCase(password);
+        // then
+        Assertions.assertEquals(true, actual);
+    }
+
+
+
+
     @ParameterizedTest
     @CsvSource({
             "short,8,password too short",
