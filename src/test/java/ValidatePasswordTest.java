@@ -92,6 +92,19 @@ public class ValidatePasswordTest {
 
 
 
+    @Test
+    public void validatePasswordListCombinedTest() {
+        // given
+        String[] myPasswordList = new String[]{"short", "verylongpassword", "numbers78UPPERlower", "ONLYUPPERCASE", "UpperLowerNoNumbers"};
+        int minLength = 8;
+        // when
+        boolean[] actual = ValidatePassword.validatePasswordList(myPasswordList, minLength);
+        // then
+        boolean[] expected = new boolean[]{false, false, true, false, false};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+
     @ParameterizedTest
     @CsvSource({
             "short, 8, false",
@@ -99,8 +112,10 @@ public class ValidatePasswordTest {
             "contain5837numbers, 8, false",
             "containsUpperLowerCase, 8, false",
             "ONLYUPPERCASE, 8, false",
-            "containsUpperLower78Numbers, 8, true"
-    })
+            "containsUpperLower78Numbers, 8, true",
+            "sL8t, 4, true",
+            "abCD, 4, false"
+     })
 
     public void validatePasswordCombinedTest(String password, int minLength, boolean expected) {
         // when
@@ -109,10 +124,7 @@ public class ValidatePasswordTest {
         Assertions.assertEquals(expected, actual);
     }
 
+
+
+
 }
-
-
-/*
-@ParameterizedTest
-
-*/
