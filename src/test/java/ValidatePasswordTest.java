@@ -94,14 +94,17 @@ public class ValidatePasswordTest {
 
     @ParameterizedTest
     @CsvSource({
-            "short,8,password too short",
-            "averylongpassword,8,password ok",
-            "eightnum,8,password ok",
+            "short, 8, false",
+            "averylongpassword, 8, false",
+            "contain5837numbers, 8, false",
+            "containsUpperLowerCase, 8, false",
+            "ONLYUPPERCASE, 8, false",
+            "containsUpperLower78Numbers, 8, true"
     })
 
-    public void validatePasswordCombinedTest(String password, int minLength, String expected) {
+    public void validatePasswordCombinedTest(String password, int minLength, boolean expected) {
         // when
-        String actual = ValidatePassword.validatePassword(password, minLength);
+        boolean actual = ValidatePassword.validatePassword(password, minLength);
         // then
         Assertions.assertEquals(expected, actual);
     }
@@ -111,12 +114,5 @@ public class ValidatePasswordTest {
 
 /*
 @ParameterizedTest
-@CsvSource({
-        "short, 8",
-        "averylongpassword, 8",
-        "contain5837numbers",
-        "containsUpperLowerCase",
-        "ONLYUPPERCASE",
-        "containsUpperLower78Numbers"
-})
+
 */

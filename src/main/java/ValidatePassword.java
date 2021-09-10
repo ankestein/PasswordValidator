@@ -2,11 +2,13 @@ import java.util.Locale;
 
 public class ValidatePassword {
 
-    public static String validatePassword(String password, int minLength){
-        if (checkLength(password, minLength)) {
-            return("password ok");
+    public static boolean validatePassword(String password, int minLength){
+        if (checkLength(password, minLength) &
+        checkContainsNumber(password) &
+        checkContainsUpperLowerCase(password)) {
+            return true;
             } else {
-            return("password too short");
+            return false;
         }
     }
 
