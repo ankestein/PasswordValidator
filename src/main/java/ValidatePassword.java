@@ -2,16 +2,6 @@ import java.util.Locale;
 
 public class ValidatePassword {
 
-    public static boolean validatePassword(String password, int minLength){
-        if (checkLength(password, minLength) &
-        checkContainsNumber(password) &
-        checkContainsUpperLowerCase(password)) {
-            return true;
-            } else {
-            return false;
-        }
-    }
-
     public static boolean checkLength(String password, int minLength) {
         return password.length() >= minLength;
     }
@@ -32,6 +22,25 @@ public class ValidatePassword {
         return containsLowerUpper;
     }
 
+    public static boolean validatePassword(String password, int minLength) {
+        boolean result;
+        if (checkLength(password, minLength) &&
+                checkContainsNumber(password) &&
+                checkContainsUpperLowerCase(password)) {
+            result = true;
+        } else {
+            result = false;
+        }
+        return result;
+    }
 
+    public static boolean[] validatePasswordList(String[] passwordList, int minLength){
+        boolean[] resultList = new boolean[passwordList.length];
+
+        for (int i = 0; i < passwordList.length; i++) {
+            resultList[i] = validatePassword(passwordList[i], minLength);
+        }
+        return resultList;
+    }
 
 }
