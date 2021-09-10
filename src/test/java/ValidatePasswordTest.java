@@ -1,10 +1,24 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class ValidatePasswordTest {
 
+    @ParameterizedTest
+    @CsvSource({"short, 8, false",
+            "averylongpassword, 8, true",
+            "eightnum, 8, true"})
+    public void checkLengthTest(String password, int minLength, boolean expected) {
+        // when
+        boolean actual = ValidatePassword.checkLength(password, minLength);
+        // then
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+/*
     @Test
     public void checkLengthShortTest() {
         // given
@@ -38,6 +52,22 @@ public class ValidatePasswordTest {
         Assertions.assertEquals(true, actual);
     }
 
+ */
+
+    @ParameterizedTest
+    @CsvSource({
+            "nonumber, false",
+            "some789numbers, true"
+    })
+    public void checkContainsNumberTest(String password, boolean expected){
+        // when
+        boolean actual = ValidatePassword.checkContainsNumber(password);
+        // then
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    /*
     @Test
     public void checkContainsNumberNoTest() {
         // given
@@ -58,7 +88,23 @@ public class ValidatePasswordTest {
         Assertions.assertEquals(true, actual);
     }
 
+     */
 
+
+    @ParameterizedTest
+    @CsvSource({
+            "onlylowercase, false",
+            "ONLYUPPERCASE, false",
+            "lowerAndUPPERCASE, true"
+    })
+    public void checkContainsUpperLowerCaseTest(String password, boolean expected){
+        // when
+        boolean actual = ValidatePassword.checkContainsUpperLowerCase(password);
+        // then
+        Assertions.assertEquals(expected, actual);
+    }
+
+/*
     @Test
     public void checkContainsUpperLowerCaseOnlyLowerTest() {
         // given
@@ -88,12 +134,12 @@ public class ValidatePasswordTest {
         // then
         Assertions.assertEquals(true, actual);
     }
-
+*/
 
 
 
     @Test
-    public void validatePasswordListCombinedTest() {
+    public void validatePasswordListTest() {
         // given
         String[] myPasswordList = new String[]{"short", "verylongpassword", "numbers78UPPERlower", "ONLYUPPERCASE", "UpperLowerNoNumbers"};
         int minLength = 8;
@@ -117,7 +163,7 @@ public class ValidatePasswordTest {
             "abCD, 4, false"
      })
 
-    public void validatePasswordCombinedTest(String password, int minLength, boolean expected) {
+    public void validatePasswordTest(String password, int minLength, boolean expected) {
         // when
         boolean actual = ValidatePassword.validatePassword(password, minLength);
         // then
