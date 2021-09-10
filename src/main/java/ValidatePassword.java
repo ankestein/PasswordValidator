@@ -12,13 +12,12 @@ public class ValidatePassword {
         return password.length() >= minLength;
     }
 
-/*
+
     public static boolean checkContainsNumber(String password) {
-
-
+        return password.matches(".*\\d.*");
     }
 
-
+/*
     public static boolean checkContainsUpperLowerCase(String password) {
 
     }

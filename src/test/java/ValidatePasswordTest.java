@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class ValidatePasswordTest {
 
     @Test
-    public void checkLengthTest() {
+    public void checkLengthShortTest() {
         // given
         String password = "short";
         int minLength = 8;
@@ -16,6 +16,47 @@ public class ValidatePasswordTest {
         Assertions.assertEquals(false, actual);
     }
 
+    @Test
+    public void checkLengthLongTest() {
+        // given
+        String password = "averylongpassword";
+        int minLength = 8;
+        // when
+        boolean actual = ValidatePassword.checkLength(password, minLength);
+        // then
+        Assertions.assertEquals(true, actual);
+    }
+
+    @Test
+    public void checkLengthCornerCaseTest() {
+        // given
+        String password = "eightnum";
+        int minLength = 8;
+        // when
+        boolean actual = ValidatePassword.checkLength(password, minLength);
+        // then
+        Assertions.assertEquals(true, actual);
+    }
+
+    @Test
+    public void checkContainsNumberNoTest() {
+        // given
+        String password = "nonumber";
+        // when
+        boolean actual = ValidatePassword.checkContainsNumber(password);
+        // then
+        Assertions.assertEquals(false, actual);
+    }
+
+    @Test
+    public void checkContainsNumberYesTest() {
+        // given
+        String password = "some789numbers";
+        // when
+        boolean actual = ValidatePassword.checkContainsNumber(password);
+        // then
+        Assertions.assertEquals(true, actual);
+    }
 
     @ParameterizedTest
     @CsvSource({
